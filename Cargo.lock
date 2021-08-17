@@ -183,9 +183,9 @@ dependencies = [
  "envy",
  "http",
  "itertools",
+ "lazy_static",
  "serde",
  "serde_yaml",
- "state",
  "yaml-rust",
 ]
 
@@ -270,15 +270,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "state"
-version = "0.2.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "99a7a6587fa4df1d26b6e32d2c5ba99583f2c818ac741b54b8a87548c349fa0d"
-dependencies = [
- "thread_local",
-]
-
-[[package]]
 name = "strsim"
 version = "0.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -311,15 +302,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "203008d98caf094106cfaba70acfed15e18ed3ddb7d94e49baec153a2b462789"
 dependencies = [
  "unicode-width",
-]
-
-[[package]]
-name = "thread_local"
-version = "0.3.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c6b53e329000edc2b34dbe8545fd20e55a333362d0a321909685a19bd28c3f1b"
-dependencies = [
- "lazy_static",
 ]
 
 [[package]]

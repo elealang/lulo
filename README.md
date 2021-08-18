@@ -1,5 +1,5 @@
 <p align="center">
-<img width=12.5% src="https://github.com/elealang/lulo/blob/master/media/logo.svg">
+<img width=12.5% src="./media/logo.svg">
 </p>
 
 # Lulo Data Language

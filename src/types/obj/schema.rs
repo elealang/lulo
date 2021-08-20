@@ -1,14 +1,14 @@
 use std::collections::HashMap;
 
 use crate::types::base;
-use crate::types::base::typ::TypeSum;
 use crate::types::obj;
+use crate::types::obj::typ::TypeObject;
 
 
 /// The Schema Schema
 /// TODO use refs in hashmap
 pub struct Schema {
-    types: Vec<obj::typ::Type>,
+    pub types: Vec<obj::typ::Type>,
     type_by_id: HashMap<base::typ::TypeId, obj::typ::Type>,
 }
 

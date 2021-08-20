@@ -4,7 +4,7 @@
 
 <br/>
 
-<h1 align="center">Lulo Data Language</h1>
+<h1 align="center">Lulo: A Data Language</h1>
 
 
 AN AMBITIOUS PROJECT

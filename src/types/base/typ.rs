@@ -1,8 +1,10 @@
 //! Types
 
+use convert_case::{Case, Casing};
 use serde;
 use serde::{Deserialize, Serialize};
 use std::string::String;
+
 
 /// Type
 #[derive(Clone, Debug, Deserialize, Eq, Ord, PartialEq, PartialOrd, Serialize)]
@@ -16,6 +18,12 @@ pub enum Type {
     Symbol(SymbolType),
     Timestamp(TimestampType),
     Date(DateType),
+}
+
+impl Type {
+    pub fn title(&self) -> String {
+        return self.id().to_string().to_case(Case::UpperCamel);
+    }
 }
 
 impl TypeSum for Type {

@@ -1,7 +1,10 @@
 //! Types
 
+use convert_case::{Case, Casing};
+
 use crate::types::base;
 use crate::types::base::typ::TypeId;
+
 
 /// Type Object
 #[derive(Clone, Debug, Eq, Ord, PartialEq, PartialOrd)]
@@ -29,9 +32,16 @@ impl Type {
             base::typ::Type::Date(t) => Type::Date(DateType::from_base(t)),
         }
     }
+
+    /// Get a proper form of the type's identifier. 
+    pub fn title(&self) -> String {
+        // remove -
+        let s = self.id().to_string().replace(&['.'][..], "-");
+        return s.to_case(Case::UpperCamel);
+    }
 }
 
-impl base::typ::TypeSum for Type {
+impl TypeObject for Type {
     fn kind(&self) -> String {
         match &*self {
             Type::Set(t) => t.kind(),
@@ -57,6 +67,12 @@ impl base::typ::TypeSum for Type {
             Type::Date(t) => t.id(),
         }
     }
+}
+
+/// TypeObject
+pub trait TypeObject {
+    fn kind(&self) -> String;
+    fn id(&self) -> &TypeId;
 }
 
 /// Set Type Object
@@ -105,7 +121,7 @@ impl SetType {
     }
 }
 
-impl base::typ::TypeSum for SetType {
+impl TypeObject for SetType {
     fn kind(&self) -> String {
         return String::from("set");
     }
@@ -148,7 +164,7 @@ impl ListType {
     }
 }
 
-impl base::typ::TypeSum for ListType {
+impl TypeObject for ListType {
     fn kind(&self) -> String {
         return String::from("list");
     }
@@ -184,7 +200,7 @@ impl TextType {
     }
 }
 
-impl base::typ::TypeSum for TextType {
+impl TypeObject for TextType {
     fn kind(&self) -> String {
         return String::from("text");
     }
@@ -220,7 +236,7 @@ impl IntegerType {
     }
 }
 
-impl base::typ::TypeSum for IntegerType {
+impl TypeObject for IntegerType {
     fn kind(&self) -> String {
         return String::from("integer");
     }
@@ -248,7 +264,7 @@ impl FloatType {
     }
 }
 
-impl base::typ::TypeSum for FloatType {
+impl TypeObject for FloatType {
     fn kind(&self) -> String {
         return String::from("float");
     }
@@ -284,7 +300,7 @@ impl SymbolType {
     }
 }
 
-impl base::typ::TypeSum for SymbolType {
+impl TypeObject for SymbolType {
     fn kind(&self) -> String {
         return String::from("symbol");
     }
@@ -312,7 +328,7 @@ impl TimestampType {
     }
 }
 
-impl base::typ::TypeSum for TimestampType {
+impl TypeObject for TimestampType {
     fn kind(&self) -> String {
         return String::from("timestamp");
     }
@@ -340,7 +356,7 @@ impl DateType {
     }
 }
 
-impl base::typ::TypeSum for DateType {
+impl TypeObject for DateType {
     fn kind(&self) -> String {
         return String::from("date");
     }
@@ -350,4 +366,3 @@ impl base::typ::TypeSum for DateType {
     }
 }
 
-//types.iter().map(|&typ| (typ.id().to_string(), typ.clone())).collect(),

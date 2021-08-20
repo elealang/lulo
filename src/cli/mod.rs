@@ -19,7 +19,7 @@ pub fn run() -> clap::ArgMatches {
         )
         .subcommand(
             App::new("check")
-                .about("Typecheck a value.")
+                .about("Typecheck a value")
                 .arg(
                     Arg::new("value")
                         .about("Value URI")
@@ -27,6 +27,16 @@ pub fn run() -> clap::ArgMatches {
                         .required(true),
                 )
                 .arg(Arg::new("type").about("Type Id").index(2).required(true)),
+        )
+        .subcommand(
+            App::new("gen")
+                .about("Generate artifacts based on a schema")
+                .arg(
+                    Arg::new("artifact-type")
+                        .about("Artifact Type e.g. rust, html, python, ...")
+                        .index(1)
+                        .required(true),
+                ),
         )
         .get_matches();
 }

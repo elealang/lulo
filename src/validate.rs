@@ -4,8 +4,10 @@
 use crate::types::base::typ::{SetSize, TypeId, TypeSum};
 use crate::types::obj::schema::Schema;
 use crate::types::obj::typ::{
-    DateType, FloatType, IntegerType, ListType, SetType, SymbolType, TextType, 
-    TimestampType, Type
+    Type, TypeObject,
+    ListType, SetType, 
+    TextType, FloatType, IntegerType, SymbolType,
+    TimestampType, DateType
 };
 use crate::types::obj::value::{SetValue, Value, ValueObject};
 
@@ -271,7 +273,7 @@ impl ToString for ErrorNotSupported {
 }
 
 #[derive(Debug, Eq, PartialEq)]
-struct ErrorUnexpectedValue {
+pub struct ErrorUnexpectedValue {
     value: Value,
     target_type: Type,
 }
@@ -287,7 +289,7 @@ impl ToString for ErrorUnexpectedValue {
 }
 
 #[derive(Debug, Eq, PartialEq)]
-struct ErrorSetHasWrongSize {
+pub struct ErrorSetHasWrongSize {
     set_type: SetType,
     set_value: SetValue,
 }
@@ -303,7 +305,7 @@ impl ToString for ErrorSetHasWrongSize {
 }
 
 #[derive(Debug, Eq, PartialEq)]
-struct ErrorSetMissingValue {
+pub struct ErrorSetMissingValue {
     set_type: SetType,
     missing_type_id: TypeId,
 }
@@ -315,7 +317,7 @@ impl ToString for ErrorSetMissingValue {
 }
 
 #[derive(Debug, Eq, PartialEq)]
-struct ErrorListValueOfUnexpectedType {
+pub struct ErrorListValueOfUnexpectedType {
     value: Value,
     list_type: ListType,
 }
@@ -331,7 +333,7 @@ impl ToString for ErrorListValueOfUnexpectedType {
 }
 
 #[derive(Debug, Eq, PartialEq)]
-struct ErrorTypeNotInSchema {
+pub struct ErrorTypeNotInSchema {
     missing_type_id: TypeId,
 }
 
@@ -341,70 +343,3 @@ impl ToString for ErrorTypeNotInSchema {
     }
 }
 
-// TESTS -----------------------------------------------------------------------
-
-#[cfg(test)]
-mod tests {
-
-    use crate::validate::is_type;
-    use crate::types::base::typ::TypeId;
-    use crate::types::obj::schema::Schema;
-    use crate::types::obj::typ::{IntegerType, SetType, SymbolType, TextType, Type};
-    use crate::types::obj::value::{IntegerValue, SetValue, SymbolValue, TextValue, Value};
-
-    #[test]
-    fn test_is_type_simple_product_type() {
-        // Type: Character Name
-        let type_name_id = TypeId::from_string("name");
-        let type_name = Type::Text(TextType::new(type_name_id.clone()));
-
-        // Type: Character Level
-        let type_level_id = TypeId::from_string("level");
-        let type_level = Type::Integer(IntegerType::new(type_level_id.clone()));
-
-        // Type: Character Class
-        let type_class_id = TypeId::from_string("class");
-        let type_class = Type::Symbol(SymbolType::new(type_class_id.clone()));
-
-        // Type: Character
-        let type_simple_prod_set_id = TypeId::from_string("simple_prod_set_type");
-        let type_simple_prod_set = Type::Set(SetType::new(
-            type_simple_prod_set_id,
-            vec![
-                type_name_id.clone(),
-                type_level_id.clone(),
-                type_class_id.clone(),
-            ],
-        ));
-
-        // Schema
-        let schema = Schema::with_types(&vec![type_name, type_level, type_class]);
-
-        let value_is_type_1 = Value::Set(SetValue::from_vec(
-            vec![
-                (type_name_id, Value::Text(TextValue::from_string("Osmar"))),
-                (type_level_id, Value::Integer(IntegerValue::from_integer(2))),
-                (
-                    type_class_id,
-                    Value::Symbol(SymbolValue::from_string("cleric")),
-                ),
-            ],
-            None,
-        ));
-
-        //let value_not_type_1 = Value::Set(value::Set::from_map(
-        //vec![
-        //(String::from("name"), Value::Text(value::Text::from_string("Osmar"))),
-        //(String::from("class"), Value::Symbol(value::Symbol::from_string("cleric"))),
-        //].into_iter().collect(),
-        //));
-
-        let validation_res = is_type(&value_is_type_1, &type_simple_prod_set, &schema);
-        assert!(validation_res.is_ok());
-        //assert_eq!(is_type(&value_is_type_1, &SIMPLE_PROD_SET_TYPE),
-        //Some(ErrIsType::SetMissingValue(ErrIsTypeSetMissingValue{
-        //set_type: SIMPLE_PROD_SET_TYPE,
-        //missing_type_id: "level",
-        //})));
-    }
-}

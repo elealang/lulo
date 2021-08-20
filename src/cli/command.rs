@@ -2,16 +2,23 @@
 
 use crate::uri;
 use crate::validate;
+use crate::gen::{
+    Artifact,
+    ArtifactProgLangTypes,
+};
+use crate::gen;
 use crate::types::base::typ::TypeId;
 use crate::types::obj::value::Value;
 use crate::types::obj::typ::Type;
 use crate::types::obj::schema::Schema;
 
 
+// COMMAND > CHECK -------------------------------------------------------------
+
 /// Type check a value
 ///
 ///   Example:
-///   lulo check /local/dir/value.yaml app.character --schema /local/dir/schema.yaml
+///   lulo --schema file://local/dir/schema.yaml check file://local/dir/value.yaml app.character 
 pub fn check(schema: Schema, matches: &clap::ArgMatches) {
     match _check(schema, matches) {
         Ok(validation) => print!("{}", validation.to_string()),
@@ -26,6 +33,7 @@ fn _check(schema: Schema, matches: &clap::ArgMatches) -> Result<validate::IsType
     return _is_type(&value, &typ, &schema);
 }
 
+/// Check Command Input
 struct CheckInput {
     value_uri: String,
     type_id: TypeId,
@@ -51,6 +59,54 @@ impl CheckInput {
             value_uri: value_uri.to_string(),
             type_id: TypeId::from_string(type_id_str),
         })
+    }
+}
+
+// COMMNAD > GEN ---------------------------------------------------------------
+
+/// Generate artifacts based on a schema
+///
+///   Example:
+///   lulo --schema file://local/dir/schema.yaml gen rust
+pub fn gen(schema: Schema, matches: &clap::ArgMatches) -> Result<String, Error> {
+    let input = GenInput::new(matches)?;
+    match gen::string(&schema, &input.artifact) {
+        Ok(s)  => return Ok(s),
+        Err(e) => return Err(Error::CouldNotGenerateArtifact(
+            ErrorCouldNotGenerateArtifact{
+                err: e,
+            }
+        )),
+    };
+}
+
+/// Gen Command Input
+struct GenInput {
+    artifact: Artifact,
+}
+
+impl GenInput {
+
+    pub fn new(matches: &clap::ArgMatches) -> Result<Self, Error> {
+
+        let artifact_type = matches.value_of("artifact-type").ok_or(
+            Error::MissingInput(ErrorMissingInput{
+                err_msg: String::from("Expected first argument 'artifact-type'"),
+            }
+        ))?;
+
+        match artifact_type {
+            "rust" => {
+                return Ok(GenInput {
+                    artifact: Artifact::ProgLangTypes(ArtifactProgLangTypes::Rust),
+                });
+            },
+            _ => {
+                return Err(Error::UnknownArtifactType(ErrorUnknownArtifactType{
+                    artifact_type: artifact_type.to_string(),
+                }))
+            },
+        }
     }
 }
 
@@ -93,27 +149,31 @@ fn _is_type(
 
 #[derive(Debug, Eq, PartialEq)]
 /// Command Error
-enum Error {
+pub enum Error {
     MissingInput(ErrorMissingInput),
     CouldNotLoadValue(ErrorCouldNotLoadValue),
     SchemaMissingType(ErrorSchemaMissingType),
     TypeCheckFailed(ErrorTypeCheckFailed),
+    CouldNotGenerateArtifact(ErrorCouldNotGenerateArtifact),
+    UnknownArtifactType(ErrorUnknownArtifactType)
 }
 
 impl ToString for Error {
     fn to_string(&self) -> String {
         match &*self {
-            Error::MissingInput(err)      => err.to_string(),
-            Error::CouldNotLoadValue(err) => err.to_string(),
-            Error::SchemaMissingType(err) => err.to_string(),
-            Error::TypeCheckFailed(err)   => err.to_string(),
+            Error::MissingInput(err)             => err.to_string(),
+            Error::CouldNotLoadValue(err)        => err.to_string(),
+            Error::SchemaMissingType(err)        => err.to_string(),
+            Error::TypeCheckFailed(err)          => err.to_string(),
+            Error::CouldNotGenerateArtifact(err) => err.to_string(),
+            Error::UnknownArtifactType(err)      => err.to_string(),
         }
     }
 }
 
 #[derive(Debug, Eq, PartialEq)]
 /// Missing Input
-struct ErrorMissingInput {
+pub struct ErrorMissingInput {
     err_msg: String,
 }
 
@@ -125,7 +185,7 @@ impl ToString for ErrorMissingInput {
 
 #[derive(Debug, Eq, PartialEq)]
 /// Could not load value from URI
-struct ErrorCouldNotLoadValue {
+pub struct ErrorCouldNotLoadValue {
     value_uri: String,
     err: uri::Err,
 }
@@ -138,7 +198,7 @@ impl ToString for ErrorCouldNotLoadValue {
 
 #[derive(Debug, Eq, PartialEq)]
 /// Could not load value from URI
-struct ErrorSchemaMissingType {
+pub struct ErrorSchemaMissingType {
     type_id: TypeId,
 }
 
@@ -150,12 +210,36 @@ impl ToString for ErrorSchemaMissingType {
 
 #[derive(Debug, Eq, PartialEq)]
 /// Could not load value from URI
-struct ErrorTypeCheckFailed {
+pub struct ErrorTypeCheckFailed {
     err: validate::Error,
 }
 
 impl ToString for ErrorTypeCheckFailed {
     fn to_string(&self) -> String {
         return format!("Type check failed with: {}", self.err.to_string());
+    }
+}
+
+#[derive(Debug, Eq, PartialEq)]
+/// Could not load value from URI
+pub struct ErrorCouldNotGenerateArtifact {
+    err: gen::error::Error,
+}
+
+impl ToString for ErrorCouldNotGenerateArtifact {
+    fn to_string(&self) -> String {
+        return format!("Could not generate artifact: {}", self.err.to_string());
+    }
+}
+
+#[derive(Debug, Eq, PartialEq)]
+/// Could not load value from URI
+pub struct ErrorUnknownArtifactType {
+    artifact_type: String,
+}
+
+impl ToString for ErrorUnknownArtifactType {
+    fn to_string(&self) -> String {
+        format!("Unknown artifact type: {}", self.artifact_type)
     }
 }

@@ -26,6 +26,7 @@ pub fn schema(uri_str: &str) -> Result<Schema, Err> {
 pub fn value(uri_str: &str) -> Result<Value, Err> {
     let value_str = string(uri_str)?;
     let value_res: Result<base::value::SetValue, _> = serde_yaml::from_str(&value_str);
+    println!("{}", uri_str);
     match value_res {
         Ok(value) => Ok(Value::Set(SetValue::from_base(value, Some(uri_str.to_string())))),
         Err(serde_err) => Err(Err::CannotDesValue(ErrCannotDesValue {
@@ -194,3 +195,4 @@ impl ToString for ErrInvalidURI {
         format!("Invalid URI [{}]", self.uri)
     }
 }
+

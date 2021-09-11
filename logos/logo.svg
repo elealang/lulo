@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="79.903038mm"
+   height="36.578632mm"
+   viewBox="0 0 79.903041 36.578633"
+   version="1.1"
+   id="svg1056"
+   sodipodi:docname="logo.svg"
+   inkscape:version="1.1 (c4e8f9e, 2021-05-24)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview855"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="1.1"
+     inkscape:cx="180.45455"
+     inkscape:cy="-86.818182"
+     inkscape:window-width="1440"
+     inkscape:window-height="855"
+     inkscape:window-x="0"
+     inkscape:window-y="23"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1-8" />
+  <defs
+     id="defs1053" />
+  <g
+     id="layer1"
+     transform="translate(-33.399818,-106.47063)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48.1312px;line-height:1.05;font-family:'Patua One';-inkscape-font-specification:'Patua One, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#88ec43;fill-opacity:1;stroke:#5fa52f;stroke-width:0.903;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="46.174431"
+       y="140.9998"
+       id="text1216"
+       transform="scale(0.99058097,1.0095086)"><tspan
+         id="tspan1214"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48.1312px;font-family:'Patua One';-inkscape-font-specification:'Patua One, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#88ec43;fill-opacity:1;stroke:#5fa52f;stroke-width:0.903;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         x="46.174431"
+         y="140.9998"
+         dx="-0.31">ul</tspan></text>
+    <g
+       id="g2906"
+       transform="matrix(0.3425,0,0,0.3425,85.571611,115.39619)">
+      <g
+         id="layer1-8"
+         style="display:inline"
+         transform="matrix(0.95255474,0,0,0.95255474,-37.201642,-71.46775)">
+        <ellipse
+           style="fill:#a7a22a;fill-opacity:0.937255;stroke-width:0.139332"
+           id="path1189"
+           cx="55.358128"
+           cy="104.85078"
+           rx="5.7465873"
+           ry="5.6087899" />
+        <ellipse
+           style="fill:#a7a22a;fill-opacity:0.937255;stroke-width:0.139332"
+           id="circle1307"
+           cx="55.358128"
+           cy="104.85078"
+           rx="5.7465873"
+           ry="5.6087899" />
+        <circle
+           style="fill:#e1ec43;fill-opacity:1;stroke:#f99b11;stroke-width:2.91802;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="path1034"
+           cx="77.719971"
+           cy="119.94108"
+           r="38.387733" />
+        <rect
+           style="fill:#fad22d;fill-opacity:1;stroke:#f99d11;stroke-width:2.25749;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect3560"
+           width="0.6872741"
+           height="64.728394"
+           x="104.85274"
+           y="62.928371"
+           transform="rotate(14.590772)" />
+        <rect
+           style="fill:#fad22d;fill-opacity:1;stroke:#f99d11;stroke-width:2.25749;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect3642"
+           width="0.6872741"
+           height="64.728394"
+           x="-98.028763"
+           y="72.7668"
+           transform="rotate(-75.334748)" />
+      </g>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48.1312px;line-height:1.05;font-family:'Patua One';-inkscape-font-specification:'Patua One, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#88ec43;fill-opacity:1;stroke:#5fa52f;stroke-width:0.903;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="34.227814"
+       y="141.42868"
+       id="text12082"
+       transform="scale(0.99058097,1.0095086)"><tspan
+         id="tspan12080"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48.1312px;font-family:'Patua One';-inkscape-font-specification:'Patua One, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#88ec43;fill-opacity:1;stroke:#5fa52f;stroke-width:0.903;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         x="34.227814"
+         y="141.42868">l</tspan></text>
+  </g>
+</svg>

@@ -1,73 +1,70 @@
-use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
+//! Values
 
-use crate::types::base::typ::TypeId;
+use serde::{Deserialize, Serialize};
+
 
 /// Value
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(rename_all(deserialize = "lowercase"))]
 pub enum Value {
-    Set(SetValue),
-    List(ListValue),
-    Text(TextValue),
-    Integer(IntegerValue),
-    Float(FloatValue),
-    Symbol(SymbolValue),
-    Timestamp(TimestampValue),
-    Date(DateValue),
+    Comb(Combination),
+    Perm(Permutation),
+    Text(Text),
+    Intg(Integer),
+    Real(Real),
+    Symb(Symbol),
 }
 
-/// Set Value
+/// Combination
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
-pub struct SetValue {
+pub struct Combination {
     #[serde(flatten)]
-    pub values: HashMap<TypeId, Value>,
-}
-
-/// List value
-#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
-pub struct ListValue {
     pub values: Vec<Value>,
 }
 
-/// Text Value
+/// Permutation
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
-#[serde(transparent)]
-pub struct TextValue {
+pub struct Permutation {
+    pub values: Vec<Value>,
+}
+
+/// Text
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+pub enum Text {
+    Literal(TextLiteral),
+    Empty(TextEmpty),
+    All(TextAll),
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+pub struct TextLiteral {
     pub value: String,
 }
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+pub struct TextEmpty {}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+pub struct TextAll {}
 
 /// Integer Value
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(transparent)]
-pub struct IntegerValue {
+pub struct Integer {
     pub value: i64,
 }
 
-/// Float Value
+/// Real Number
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(transparent)]
-pub struct FloatValue {
+pub struct Real {
     pub value: i64,
 }
 
 /// Symbol Value
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(transparent)]
-pub struct SymbolValue {
+pub struct Symbol {
     pub value: String,
 }
 
-/// Timestamp Value
-#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
-#[serde(transparent)]
-pub struct TimestampValue {
-    pub value: i64,
-}
-
-/// Date Value
-#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
-#[serde(transparent)]
-pub struct DateValue {
-    pub value: i64,
-}

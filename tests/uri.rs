@@ -1,8 +1,8 @@
 mod config;
 
 use lulo::uri;
-use lulo::types::base::typ::TypeId;
-use lulo::types::obj::value::{
+use lulo::types::atom::typ::TypeId;
+use lulo::types::object::value::{
     Value,
     SetValue,
     TextValue, IntegerValue, SymbolValue

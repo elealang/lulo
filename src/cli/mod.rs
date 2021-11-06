@@ -1,43 +1,36 @@
-pub mod command;
-pub mod error;
-pub mod schema;
+//! CLI
 
-use clap::{App, AppSettings, Arg};
+pub mod command;
+
+
+use clap::{App, AppSettings, ArgMatches};
+
+use crate::cli::command::db;
 
 
 /// Run the Command Line Interface
-pub fn run() -> clap::ArgMatches {
-    return App::new("Lulo")
-        .version("0.1.0")
-        .about("A Data Language with an advanced type system, code/documentation generation, and other features.")
-        .setting(AppSettings::ArgRequiredElseHelp)
-        .arg(
-            Arg::new("schema")
-                .long("schema")
-                .takes_value(true)
-                .about("Schema URI"),
-        )
-        .subcommand(
-            App::new("check")
-                .about("Typecheck a value")
-                .arg(
-                    Arg::new("value")
-                        .about("Value URI")
-                        .index(1)
-                        .required(true),
-                )
-                .arg(Arg::new("type").about("Type Id").index(2).required(true)),
-        )
-        .subcommand(
-            App::new("gen")
-                .about("Generate artifacts based on a schema")
-                .arg(
-                    Arg::new("artifact-type")
-                        .about("Artifact Type e.g. rust, html, python, ...")
-                        .index(1)
-                        .required(true),
-                ),
-        )
-        .get_matches();
+pub fn run() {
+    
+    let matches = matches();
+
+    match matches.subcommand() {
+        Some(("db", db_matches)) => db::eval(db_matches),
+        Some((cmd    , _    ))   => {
+            println!("Unknown command: {}", cmd)
+        },
+        _                        => {
+            println!("{}", "Unknown error")
+        }
+    }
 }
 
+
+/// Run the CLI and get the user input
+fn matches() -> ArgMatches {
+    return App::new("Lulo")
+        .version("0.1.0")
+        .about("A Data Language with an advanced type system, code/documentation generation, and much more!")
+        .setting(AppSettings::ArgRequiredElseHelp)
+        .subcommand(db::command())
+        .get_matches();
+}

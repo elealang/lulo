@@ -1,8 +1,12 @@
+//! Value
+//! Value objects
+
+
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
-use crate::types::base;
-use crate::types::base::typ::TypeId;
+use crate::types::atom;
+use crate::types::atom::typ::TypeId;
 
 
 /// Value
@@ -19,16 +23,16 @@ pub enum Value {
 }
 
 impl Value {
-    pub fn from_base(value: base::value::Value, origin_uri: Option<String>) -> Self {
+    pub fn from_base(value: atom::value::Value, origin_uri: Option<String>) -> Self {
         match value {
-            base::value::Value::Set(t) => Value::Set(SetValue::from_base(t, origin_uri)),
-            base::value::Value::List(t) => Value::List(ListValue::from_base(t, origin_uri)),
-            base::value::Value::Text(t) => Value::Text(TextValue::from_base(t, origin_uri)),
-            base::value::Value::Integer(t) => Value::Integer(IntegerValue::from_base(t, origin_uri)),
-            base::value::Value::Float(t) => Value::Float(FloatValue::from_base(t, origin_uri)),
-            base::value::Value::Symbol(t) => Value::Symbol(SymbolValue::from_base(t, origin_uri)),
-            base::value::Value::Timestamp(t) => Value::Timestamp(TimestampValue::from_base(t, origin_uri)),
-            base::value::Value::Date(t) => Value::Date(DateValue::from_base(t, origin_uri)),
+            atom::value::Value::Set(t) => Value::Set(SetValue::from_base(t, origin_uri)),
+            atom::value::Value::List(t) => Value::List(ListValue::from_base(t, origin_uri)),
+            atom::value::Value::Text(t) => Value::Text(TextValue::from_base(t, origin_uri)),
+            atom::value::Value::Integer(t) => Value::Integer(IntegerValue::from_base(t, origin_uri)),
+            atom::value::Value::Float(t) => Value::Float(FloatValue::from_base(t, origin_uri)),
+            atom::value::Value::Symbol(t) => Value::Symbol(SymbolValue::from_base(t, origin_uri)),
+            atom::value::Value::Timestamp(t) => Value::Timestamp(TimestampValue::from_base(t, origin_uri)),
+            atom::value::Value::Date(t) => Value::Date(DateValue::from_base(t, origin_uri)),
         }
     }
 }
@@ -63,7 +67,7 @@ pub struct SetValue {
 }
 
 impl SetValue {
-    pub fn from_base(value: base::value::SetValue, origin_uri: Option<String>) -> Self {
+    pub fn from_base(value: atom::value::SetValue, origin_uri: Option<String>) -> Self {
         SetValue {
             values: value
                 .values
@@ -96,7 +100,7 @@ pub struct ListValue {
 }
 
 impl ListValue {
-    pub fn from_base(value: base::value::ListValue, origin_uri: Option<String>) -> Self {
+    pub fn from_base(value: atom::value::ListValue, origin_uri: Option<String>) -> Self {
         ListValue {
             values: value
                 .values
@@ -122,7 +126,7 @@ pub struct TextValue {
 }
 
 impl TextValue {
-    pub fn from_base(value: base::value::TextValue, origin_uri: Option<String>) -> Self {
+    pub fn from_base(value: atom::value::TextValue, origin_uri: Option<String>) -> Self {
         TextValue { 
             value: value.value,
             origin_uri: origin_uri,
@@ -151,7 +155,7 @@ pub struct IntegerValue {
 }
 
 impl IntegerValue {
-    pub fn from_base(value: base::value::IntegerValue, origin_uri: Option<String>) -> Self {
+    pub fn from_base(value: atom::value::IntegerValue, origin_uri: Option<String>) -> Self {
         IntegerValue { 
             value: value.value,
             origin_uri: origin_uri,
@@ -180,7 +184,7 @@ pub struct FloatValue {
 }
 
 impl FloatValue {
-    pub fn from_base(value: base::value::FloatValue, origin_uri: Option<String>) -> Self {
+    pub fn from_base(value: atom::value::FloatValue, origin_uri: Option<String>) -> Self {
         FloatValue { 
             value: value.value,
             origin_uri: origin_uri,
@@ -202,7 +206,7 @@ pub struct SymbolValue {
 }
 
 impl SymbolValue {
-    pub fn from_base(value: base::value::SymbolValue, origin_uri: Option<String>) -> Self {
+    pub fn from_base(value: atom::value::SymbolValue, origin_uri: Option<String>) -> Self {
         SymbolValue { 
             value: value.value,
             origin_uri: origin_uri,
@@ -231,7 +235,7 @@ pub struct TimestampValue {
 }
 
 impl TimestampValue {
-    pub fn from_base(value: base::value::TimestampValue, origin_uri: Option<String>) -> Self {
+    pub fn from_base(value: atom::value::TimestampValue, origin_uri: Option<String>) -> Self {
         TimestampValue { 
             value: value.value,
             origin_uri: origin_uri,
@@ -260,7 +264,7 @@ pub struct DateValue {
 }
 
 impl DateValue {
-    pub fn from_base(value: base::value::DateValue, origin_uri: Option<String>) -> Self {
+    pub fn from_base(value: atom::value::DateValue, origin_uri: Option<String>) -> Self {
         DateValue { 
             value: value.value,
             origin_uri: origin_uri,

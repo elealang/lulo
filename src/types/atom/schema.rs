@@ -1,7 +1,12 @@
+//! Schema
+//! Collections of related types
+
+
 use serde;
 use serde::{Deserialize, Serialize};
 
-use crate::types::base::typ::Type;
+use crate::types::atom::typ::Type;
+
 
 /// The Schema Schema
 #[derive(Deserialize, Serialize)]

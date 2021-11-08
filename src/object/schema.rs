@@ -4,8 +4,8 @@
 
 use std::collections::HashMap;
 
-use crate::types::atom;
-use crate::types::atom::typ::{Type, TypeId};
+use crate::types;
+use crate::types::typ::{Type, TypeId};
 
 
 /// The Schema Schema
@@ -17,7 +17,7 @@ pub struct Schema {
 
 impl Schema {
 
-    pub fn from_atom(schema: atom::schema::Schema) -> Self {
+    pub fn from_atom(schema: types::schema::Schema) -> Self {
         Schema::with_types(&schema.types.iter().map(|typ| {
             typ.clone()
         }).collect())

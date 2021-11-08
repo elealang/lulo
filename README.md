@@ -51,3 +51,10 @@ value + "" = "dog"
 ### is one of
 
 value `in` other_values
+
+
+
+## code style
+
+one error type per module, defined by scope of package
+use structure of interface, lib, main.rs, object, and types

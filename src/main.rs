@@ -1,13 +1,14 @@
 //! Lulo CLI Entrypoint
 
 
-mod cli;
+mod interface;
+mod lib;
+mod object;
 mod types;
-mod uri;
 
 
 fn main() {
-    cli::run(); 
+    interface::cli::run(); 
 }
 
 

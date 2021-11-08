@@ -5,7 +5,7 @@ pub mod command;
 
 use clap::{App, AppSettings, ArgMatches};
 
-use crate::cli::command::db;
+use crate::interface::cli::command::db;
 
 
 /// Run the Command Line Interface

@@ -11,6 +11,7 @@ use crate::types::typ::Type;
 /// The Schema Schema
 #[derive(Deserialize, Serialize)]
 pub struct Schema {
-    pub name: String,
+    pub id: String,
+    pub namespace: String,
     pub types: Vec<Type>,
 }

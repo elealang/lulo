@@ -12,7 +12,7 @@ use strum_macros::{Display, EnumString};
 
 
 /// URIs
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct URI {
     pub scheme: Scheme,
     pub path: Path,
@@ -33,9 +33,17 @@ impl ToString for URI {
     }
 }
 
+impl URI {
+
+    pub fn to_file_path(&self) -> std::path::PathBuf {
+        let path_str = self.path.to_string();
+        return std::path::PathBuf::from(&path_str);
+    }
+}
+
 
 /// Path
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Path {
     pub segments: Vec<PathSegment>,
 }
@@ -51,12 +59,12 @@ impl ToString for Path {
 
 
 /// Path Segment
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct PathSegment(String);
 
 
 /// Scheme
-#[derive(Debug, Deserialize, Display, PartialEq, EnumString, Serialize)]
+#[derive(Clone, Debug, Deserialize, Display, PartialEq, EnumString, Serialize)]
 #[strum(serialize_all = "snake_case")]
 pub enum Scheme {
     File,

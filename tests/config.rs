@@ -4,10 +4,9 @@ use serde::Deserialize;
 use std::path::Path;
 
 use lulo::types::base::typ::TypeId;
-use lulo::types::obj::value::{IntegerValue, SetValue, SymbolValue, TextValue, Value};
 use lulo::types::obj::schema::Schema;
+use lulo::types::obj::value::{IntegerValue, SetValue, SymbolValue, TextValue, Value};
 use lulo::uri;
-
 
 #[derive(Deserialize, Debug)]
 pub struct Config {
@@ -16,7 +15,6 @@ pub struct Config {
 }
 
 impl Config {
-
     pub fn from_env() -> Config {
         // Load testing env vars
         dotenv::from_filename(".env.test").ok();
@@ -60,7 +58,7 @@ impl Config {
             None => panic!("Could not get value file path"),
         }
     }
-    
+
     pub fn test_value_file_uri(&self, value_name: &str) -> String {
         let filepath = self.test_value_file_path(value_name);
         return format!("file:/{}", filepath);
@@ -74,7 +72,6 @@ impl Config {
         }
     }
 }
-
 
 // DATASETS --------------------------------------------------------------------
 

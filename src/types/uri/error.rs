@@ -1,6 +1,5 @@
 //! URI: Error
 
-
 #[derive(Debug, Eq, PartialEq)]
 pub enum Error {
     Parse(ErrorParse),
@@ -13,7 +12,6 @@ impl ToString for Error {
         }
     }
 }
-
 
 #[derive(Debug, Eq, PartialEq)]
 pub struct ErrorParse {

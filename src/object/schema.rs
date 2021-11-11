@@ -1,12 +1,10 @@
 //! Schema
 //! A collection of types
 
-
 use std::collections::HashMap;
 
 use crate::types;
 use crate::types::typ::{Type, TypeId};
-
 
 /// The Schema Schema
 /// TODO use refs in hashmap?
@@ -16,11 +14,8 @@ pub struct Schema {
 }
 
 impl Schema {
-
     pub fn from_atom(schema: types::schema::Schema) -> Self {
-        Schema::with_types(&schema.types.iter().map(|typ| {
-            typ.clone()
-        }).collect())
+        Schema::with_types(&schema.types.iter().map(|typ| typ.clone()).collect())
     }
 
     pub fn with_types(types: &Vec<Type>) -> Schema {

@@ -3,15 +3,10 @@ mod config;
 use config::Config;
 
 use lulo::gen;
-use lulo::gen::{
-    Artifact,
-    ArtifactProgLangTypes,
-};
-
+use lulo::gen::{Artifact, ArtifactProgLangTypes};
 
 #[test]
 fn test_rpg_character_simple() {
-
     // Setup
     let config = Config::from_env();
     let schema = config.test_schema("rpg");
@@ -40,10 +35,10 @@ fn test_rpg_character_simple() {
         Ok(mut code) => {
             remove_whitespace(&mut code);
             assert_eq!(code, expected_code);
-        },
+        }
         Err(err) => {
             panic!("{}", err.to_string());
-        },
+        }
     }
 }
 

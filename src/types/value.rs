@@ -1,12 +1,10 @@
 //! Value
 //! The available data types.
 
-
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 use super::typ::TypeId;
-
 
 /// Value
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]

@@ -1,29 +1,26 @@
 //! CLI
 
 pub mod command;
-
+mod util;
 
 use clap::{App, AppSettings, ArgMatches};
 
 use crate::interface::cli::command::db;
 
-
 /// Run the Command Line Interface
 pub fn run() {
-    
     let matches = matches();
 
     match matches.subcommand() {
         Some(("db", db_matches)) => db::eval(db_matches),
-        Some((cmd    , _    ))   => {
+        Some((cmd, _)) => {
             println!("Unknown command: {}", cmd)
-        },
-        _                        => {
+        }
+        _ => {
             println!("{}", "Unknown error")
         }
     }
 }
-
 
 /// Run the CLI and get the user input
 fn matches() -> ArgMatches {

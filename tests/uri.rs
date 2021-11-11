@@ -1,17 +1,12 @@
 mod config;
 
-use lulo::uri;
-use lulo::types::atom::typ::TypeId;
-use lulo::types::object::value::{
-    Value,
-    SetValue,
-    TextValue, IntegerValue, SymbolValue
-};
 use config::Config;
+use lulo::types::atom::typ::TypeId;
+use lulo::types::object::value::{IntegerValue, SetValue, SymbolValue, TextValue, Value};
+use lulo::uri;
 
 #[test]
 fn test_uri_rpg_character_simple() {
-
     let config = Config::from_env();
 
     let value_uri = config.test_value_file_uri("rpg/character_simple");

@@ -1,14 +1,11 @@
-
-use lulo::validate;
 use lulo::types::base::typ::TypeId;
 use lulo::types::obj::schema::Schema;
 use lulo::types::obj::typ::{IntegerType, SetType, SymbolType, TextType, Type};
 use lulo::types::obj::value::{IntegerValue, SetValue, SymbolValue, TextValue, Value};
-
+use lulo::validate;
 
 #[test]
 fn test_is_type_simple_product_type() {
-
     // Type: Character Name
     let type_name_id = TypeId::from_string("name");
     let type_name = Type::Text(TextType::new(type_name_id.clone()));

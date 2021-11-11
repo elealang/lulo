@@ -1,13 +1,10 @@
 //! Type
 //! Types are a composition of values and changes.
 
-
 use serde::{Deserialize, Serialize};
-
 
 use super::change::Change;
 use super::value::Value;
-
 
 /// TypeId
 #[derive(Clone, Debug, Deserialize, Eq, Hash, PartialEq, PartialOrd, Ord, Serialize)]
@@ -25,16 +22,14 @@ impl ToString for TypeId {
     }
 }
 
-
 /// Type
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 pub struct Type {
-    pub id:      TypeId,
-    pub kind:    Kind,
-    pub value:   Value,
+    pub id: TypeId,
+    pub kind: Kind,
+    pub value: Value,
     pub changes: Vec<Change>,
 }
-
 
 /// Kind
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]

@@ -1,21 +1,26 @@
 //! Schema
 //! A collection of types
 
+
 use std::collections::HashMap;
 
-use crate::types;
 use crate::types::typ::{Type, TypeId};
+use crate::types::uri::URI;
 
-/// The Schema Schema
+
+/// Schema objects
 /// TODO use refs in hashmap?
 pub struct Schema {
+    pub id: String,
+    pub namespace: String,
     pub types: Vec<Type>,
     type_by_id: HashMap<TypeId, Type>,
 }
 
 impl Schema {
-    pub fn from_atom(schema: types::schema::Schema) -> Self {
-        Schema::with_types(&schema.types.iter().map(|typ| typ.clone()).collect())
+
+    pub fn from_uri(uri: &URI) -> Result<Schema, Error> {
+
     }
 
     pub fn with_types(types: &Vec<Type>) -> Schema {

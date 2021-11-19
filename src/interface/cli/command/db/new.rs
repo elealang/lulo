@@ -5,7 +5,7 @@ use clap::{App, Arg, ArgMatches};
 use console::style;
 
 use crate::interface::cli::util;
-use crate::lib;
+use crate::api;
 use crate::types::uri;
 use crate::types::uri::URI;
 
@@ -34,10 +34,13 @@ pub fn eval(matches: &ArgMatches) {
     let uri = util::val_or_cli_error(URI::from_string(db_uri), &|e: uri::error::Error| {
         e.to_string()
     });
-    let mut db = lib::db::new(uri);
+    let mut db = api::db::new(uri);
     db.set_id(db_name);
     println!("🚀 {}", style("database created").cyan(),);
     println!("{}", "-------------------");
-    lib::db::sync(&db);
+
+    util::val_or_cli_error(api::db::sync(&db), &|e: api::db::error::Error| {
+        e.to_string()
+    });
     db.print_cli();
 }

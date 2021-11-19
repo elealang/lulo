@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::types::typ::Type;
 
-/// The Schema Schema
+/// Schemas
 #[derive(Deserialize, Serialize)]
 pub struct Schema {
     pub id: String,

@@ -5,7 +5,7 @@ use clap::{App, Arg, ArgMatches};
 use console::style;
 
 use crate::interface::cli::util;
-use crate::lib;
+use crate::api;
 use crate::types::uri;
 use crate::types::uri::URI;
 
@@ -26,7 +26,7 @@ pub fn eval(matches: &ArgMatches) {
         e.to_string()
     });
 
-    let db = util::val_or_cli_error(lib::db::database(&uri), &|e: lib::db::error::Error| {
+    let db = util::val_or_cli_error(api::db::database(&uri), &|e: api::db::error::Error| {
         e.to_string()
     });
 

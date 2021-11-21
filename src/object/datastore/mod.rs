@@ -4,8 +4,8 @@
 pub mod error;
 pub mod fsdev;
 
-use crate::types::database::Database;
-use crate::types::uri::URI;
+use crate::atom::database::Database;
+use crate::atom::uri::URI;
 
 /// DataStore trait
 pub trait DataStore<E> {

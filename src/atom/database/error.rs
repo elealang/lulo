@@ -1,6 +1,6 @@
 //! Database: Error
 
-use crate::types::uri;
+use crate::atom::uri;
 
 pub enum Error {
     URI(uri::error::Error),

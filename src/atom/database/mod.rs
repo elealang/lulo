@@ -7,8 +7,8 @@ use console::style;
 use serde;
 use serde::{Deserialize, Serialize};
 
-use crate::types::schema::Schema;
-use crate::types::uri::URI;
+use crate::atom::schema::Schema;
+use crate::atom::uri::URI;
 
 /// Database
 #[derive(Deserialize, Serialize)]

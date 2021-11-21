@@ -1,7 +1,5 @@
 
 pub mod api;
-pub use api::uri;
-
+pub mod atom;
 pub mod interface;
-mod object;
-mod types;
+pub mod object;

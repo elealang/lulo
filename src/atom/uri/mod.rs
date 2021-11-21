@@ -2,11 +2,17 @@
 //! Uniform Resource Identifiers used by Lulo to provide generic interfaces
 
 pub mod error;
+pub mod fetch;
 pub mod parse;
 
 use serde;
 use serde::{Deserialize, Serialize};
 use strum_macros::{Display, EnumString};
+
+
+// =================================================================================================
+// PUBLIC
+// =================================================================================================
 
 /// URIs
 #[derive(Clone, Debug, Deserialize, Serialize)]

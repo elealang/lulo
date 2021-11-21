@@ -11,8 +11,8 @@ use serde::{Deserialize, Serialize};
 use std::path::Path;
 
 use crate::object::datastore::DataStore;
-use crate::types::database::Database;
-use crate::types::uri::URI;
+use crate::atom::database::Database;
+use crate::atom::uri::URI;
 
 use error::Error;
 

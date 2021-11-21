@@ -2,6 +2,6 @@
 //! public functions for URIs
 
 
-pub use crate::types::uri::URI;
+pub use crate::atom::uri::URI;
 
 

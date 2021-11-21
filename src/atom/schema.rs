@@ -4,7 +4,7 @@
 use serde;
 use serde::{Deserialize, Serialize};
 
-use crate::types::typ::Type;
+use crate::atom::typ::Type;
 
 /// Schemas
 #[derive(Deserialize, Serialize)]

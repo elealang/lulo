@@ -6,8 +6,8 @@ use console::style;
 
 use crate::interface::cli::util;
 use crate::api;
-use crate::types::uri;
-use crate::types::uri::URI;
+use crate::atom::uri;
+use crate::atom::uri::URI;
 
 pub fn command<'a>() -> App<'a> {
     return App::new("info").about("Information on the database").arg(

@@ -5,11 +5,13 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 use super::typ::TypeId;
+use super::uri::URI;
 
 /// Value
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
-#[serde(rename_all(deserialize = "lowercase"))]
+#[serde(rename_all(deserialize = "lowercase", serialize = "lowercase"))]
 pub enum Value {
+    Register(RegisterValue),
     Set(SetValue),
     List(ListValue),
     Text(TextValue),
@@ -20,12 +22,26 @@ pub enum Value {
     Date(DateValue),
 }
 
+
+/// Register Value
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+pub struct RegisterValue {
+    pub uri: URI,
+}
+
+
 /// Set Value
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 pub struct SetValue {
-    #[serde(flatten)]
-    pub values: HashMap<TypeId, Value>,
+    pub values: Vec<SetValueMember>,
 }
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+pub struct SetValueMember {
+    pub type_id: TypeId,
+    pub value: Value,
+}
+
 
 /// List value
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
@@ -33,12 +49,23 @@ pub struct ListValue {
     pub values: Vec<Value>,
 }
 
+
 /// Text Value
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(transparent)]
 pub struct TextValue {
     pub value: String,
 }
+
+impl TextValue {
+
+    pub fn from_string(s: &str) -> Self {
+        return TextValue {
+            value: s.to_string(),
+        } 
+    }
+}
+
 
 /// Integer Value
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]

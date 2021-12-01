@@ -1,20 +1,20 @@
-id: tasks
-namespace: 'com.my_task_app'
+id: id
+namespace: namespace
 types:
-  -	id: task
-    kind: set
+  - id: task
     value:
       set:
-        # must be set, so don't need to specify kind here
-        - id: id
-          value: random_uuid
-        - id: status
-          value: :uncompleted
-        - id: created_at
-          value: current_timestamp
-        - id: updated_at
-          value: current_timestamp
-    changes:
-      - required: true
-        change:
-          type_id: task.title
+        values:
+          - type_id: task.id
+            value: 
+              register: register://local/sys/random_uuid
+          - type_id: task.status
+            value: 
+              symbol: :uncompleted
+          - type_id: task.created_at
+            value:
+              register: register://local/sys/current_timestamp
+          - type_id: task.updated_at
+            value:
+              register: register://local/sys/current_timestamp
+    changes: []

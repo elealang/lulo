@@ -26,14 +26,13 @@ impl ToString for TypeId {
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 pub struct Type {
     pub id: TypeId,
-    pub kind: Kind,
     pub value: Value,
     pub changes: Vec<Change>,
 }
 
 /// Kind
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
-#[serde(rename_all(deserialize = "lowercase"))]
+#[serde(rename_all(deserialize = "lowercase", serialize = "lowercase"))]
 pub enum Kind {
     Set,
     List,

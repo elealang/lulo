@@ -6,7 +6,8 @@ pub mod fetch;
 pub mod parse;
 
 use serde;
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize, Deserializer, Serialize};
+use serde::de::Error;
 use strum_macros::{Display, EnumString};
 
 
@@ -15,7 +16,7 @@ use strum_macros::{Display, EnumString};
 // =================================================================================================
 
 /// URIs
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct URI {
     pub scheme: Scheme,
     pub path: Path,
@@ -34,6 +35,22 @@ impl ToString for URI {
     }
 }
 
+
+impl<'de> Deserialize<'de> for URI {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        let s: &str = Deserialize::deserialize(deserializer)?;
+        let uri_or_err = match URI::from_string(&s) {
+            Ok(s)    => return Ok(s),
+            Err(err) => return Err(D::Error::custom(err)),
+        }
+    }
+}
+
+
+
 impl URI {
     pub fn to_file_path(&self) -> std::path::PathBuf {
         let path_str = self.path.to_string();
@@ -42,7 +59,7 @@ impl URI {
 }
 
 /// Path
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 pub struct Path {
     pub segments: Vec<PathSegment>,
 }
@@ -59,11 +76,11 @@ impl ToString for Path {
 }
 
 /// Path Segment
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 pub struct PathSegment(String);
 
 /// Scheme
-#[derive(Clone, Debug, Deserialize, Display, PartialEq, EnumString, Serialize)]
+#[derive(Clone, Debug, Deserialize, Display, EnumString, Eq, PartialEq, Serialize)]
 #[strum(serialize_all = "snake_case")]
 pub enum Scheme {
     File,

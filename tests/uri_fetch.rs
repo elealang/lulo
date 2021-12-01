@@ -4,6 +4,9 @@
 
 mod common;
 
+use lulo::atom::schema::Schema;
+use lulo::atom::typ::{Type, TypeId, Kind};
+use lulo::atom::value::{Value, SetValue, SetValueMember, TextValue};
 use lulo::atom::uri;
 
 
@@ -11,7 +14,29 @@ use lulo::atom::uri;
 fn object_from_uri_use_case_task_app() {
 
     let uri = common::data_uri("/use_cases/task_app/schema.yaml");
-    //assertq!(true, false);
+
+    // experiment deserializae schema
+    //let typ = Type {
+        //id: TypeId::from_string("my_type"),
+        //value: Value::Set(SetValue{
+            //values: vec![SetValueMember{
+                //type_id: TypeId::from_string("dog"),
+                //value: Value::Text(TextValue::from_string("dog")),
+            //}]
+        //}),
+        //changes: Vec::new(),
+    //};
+    //let schema = Schema {
+        //id: String::from("id"),
+        //namespace: String::from("namespace"),
+        //types: vec![typ],
+    //};
+
+    //let str_or_err = serde_yaml::to_string(&schema);
+    //match str_or_err {
+        //Ok(s)    => println!("{}", s),
+        //Err(err) => println!("{}", err),
+    //};
 
     let schema_or_err = uri::fetch::schema(&uri);
     match schema_or_err {

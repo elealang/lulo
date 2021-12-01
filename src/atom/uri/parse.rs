@@ -33,7 +33,7 @@ pub fn uri_from_string(uri_string: &str) -> Result<URI, Error> {
 
 /// Schema from string
 fn scheme(input: &str) -> IResult<&str, Scheme> {
-    let (rest, scheme_str) = alt((tag("file"), tag("http")))(input)?;
+    let (rest, scheme_str) = alt((tag("file"), tag("http"), tag("register")))(input)?;
     return Ok((rest, Scheme::from_str(scheme_str).unwrap()));
 }
 

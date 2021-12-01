@@ -6,7 +6,7 @@ mod common;
 
 use lulo::atom::schema::Schema;
 use lulo::atom::typ::{Type, TypeId, Kind};
-use lulo::atom::value::{Value, SetValue, SetValueMember, TextValue};
+use lulo::atom::value::{Value, SetValue, SetValueMember, RegisterValue};
 use lulo::atom::uri;
 
 
@@ -21,7 +21,9 @@ fn object_from_uri_use_case_task_app() {
         //value: Value::Set(SetValue{
             //values: vec![SetValueMember{
                 //type_id: TypeId::from_string("dog"),
-                //value: Value::Text(TextValue::from_string("dog")),
+                //value: Value::Register(RegisterValue{
+                    //uri: uri.clone(),
+                //}),
             //}]
         //}),
         //changes: Vec::new(),

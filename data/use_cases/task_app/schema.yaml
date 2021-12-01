@@ -7,14 +7,17 @@ types:
         values:
           - type_id: task.id
             value: 
-              register: register://local/sys/random_uuid
+              register: 
+                uri: register://local/sys/random_uuid
           - type_id: task.status
             value: 
               symbol: :uncompleted
           - type_id: task.created_at
             value:
-              register: register://local/sys/current_timestamp
+              register: 
+                uri: register://local/sys/current_timestamp
           - type_id: task.updated_at
             value:
-              register: register://local/sys/current_timestamp
+              register: 
+                uri: register://local/sys/current_timestamp
     changes: []

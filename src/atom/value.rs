@@ -2,7 +2,6 @@
 //! The available data types.
 
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
 
 use super::typ::TypeId;
 use super::uri::URI;
@@ -101,3 +100,4 @@ pub struct TimestampValue {
 pub struct DateValue {
     pub value: i64,
 }
+

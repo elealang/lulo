@@ -7,7 +7,8 @@ pub mod parse;
 
 use serde;
 use serde::{Deserialize, Deserializer, Serialize};
-use serde::de::Error;
+use serde::de::{self, Error, Visitor};
+use std::fmt;
 use strum_macros::{Display, EnumString};
 
 
@@ -37,18 +38,46 @@ impl ToString for URI {
 
 
 impl<'de> Deserialize<'de> for URI {
-    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<URI, D::Error>
     where
         D: Deserializer<'de>,
     {
-        let s: &str = Deserialize::deserialize(deserializer)?;
-        let uri_or_err = match URI::from_string(&s) {
-            Ok(s)    => return Ok(s),
-            Err(err) => return Err(D::Error::custom(err)),
-        }
+        deserializer.deserialize_any(URIVisitor)
     }
 }
 
+struct URIVisitor;
+
+impl<'de> Visitor<'de> for URIVisitor {
+    type Value = URI;
+
+    fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+        formatter.write_str("an integer between -2^31 and 2^31")
+    }
+
+    fn visit_str<E>(self, v: &str) -> Result<Self::Value, E>
+    where
+        E: de::Error,
+    {
+        match URI::from_string(v) {
+            Err(err) => {
+                println!("{}", err.to_string());
+                return Err(E::custom(err.to_string()));
+            },
+            Ok(uri)  => return Ok(uri),
+        }
+    }
+
+    fn visit_string<E>(self, v: String) -> Result<Self::Value, E>
+    where
+        E: de::Error,
+    {
+        match URI::from_string(&v) {
+            Err(err) => Err(E::custom(err.to_string())),
+            Ok(uri)  => Ok(uri),
+        }
+    }
+}
 
 
 impl URI {
@@ -82,7 +111,9 @@ pub struct PathSegment(String);
 /// Scheme
 #[derive(Clone, Debug, Deserialize, Display, EnumString, Eq, PartialEq, Serialize)]
 #[strum(serialize_all = "snake_case")]
+#[serde(rename_all = "snake_case")]
 pub enum Scheme {
     File,
     Http,
+    Register,
 }

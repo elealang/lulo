@@ -4,6 +4,7 @@
 
 mod common;
 
+use lulo::atom::change::{Change, Operation, AddOperation};
 use lulo::atom::schema::Schema;
 use lulo::atom::typ::{Type, TypeId, Kind};
 use lulo::atom::value::{Value, SetValue, SetValueMember, RegisterValue};
@@ -16,6 +17,12 @@ fn object_from_uri_use_case_task_app() {
     let uri = common::data_uri("/use_cases/task_app/schema.yaml");
 
     // experiment deserializae schema
+    //let change = Change {
+        //required: true,
+        //operation: Operation::Add(AddOperation{
+            //value_of_type: TypeId::from_string("type"),
+        //}),
+    //};
     //let typ = Type {
         //id: TypeId::from_string("my_type"),
         //value: Value::Set(SetValue{
@@ -26,7 +33,7 @@ fn object_from_uri_use_case_task_app() {
                 //}),
             //}]
         //}),
-        //changes: Vec::new(),
+        //changes: vec![change],
     //};
     //let schema = Schema {
         //id: String::from("id"),

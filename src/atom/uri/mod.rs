@@ -7,7 +7,7 @@ pub mod parse;
 
 use serde;
 use serde::{Deserialize, Deserializer, Serialize};
-use serde::de::{self, Error, Visitor};
+use serde::de::{self, Visitor};
 use std::fmt;
 use strum_macros::{Display, EnumString};
 

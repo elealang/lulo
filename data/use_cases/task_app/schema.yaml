@@ -20,4 +20,8 @@ types:
             value:
               register: 
                 uri: register://local/sys/current_timestamp
-    changes: []
+    changes:
+      - required: true
+        operation:
+          add:
+            value_of_type: type

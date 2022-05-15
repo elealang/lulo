@@ -1,0 +1,6 @@
+character_simple_name:
+  text: Osmar
+character_simple_level: 
+  integer: 2
+character_simple_class: 
+  symbol: cleric

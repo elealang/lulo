@@ -1,0 +1,18 @@
+types:
+  - kind: set
+    id: character-simple 
+    label: 'Simple Character'
+    description: 'Simple RPG character '
+    type_ids:
+      - character-simple.name
+      - character-simple.level
+      - character-simple.class
+  - kind: text
+    id: character-simple.name
+    label: 'Simple Character Name'
+  - kind: integer
+    id: character-simple.level
+    label: 'Simple Character: Level'
+  - kind: symbol
+    id: character-simple.class
+    label: 'Simple Character: Class'

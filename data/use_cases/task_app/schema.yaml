@@ -1,0 +1,27 @@
+id: id
+namespace: namespace
+types:
+  - id: task
+    value:
+      set:
+        values:
+          - type_id: task.id
+            value: 
+              register: 
+                uri: register://local/sys/random_uuid
+          - type_id: task.status
+            value: 
+              symbol: :uncompleted
+          - type_id: task.created_at
+            value:
+              register: 
+                uri: register://local/sys/current_timestamp
+          - type_id: task.updated_at
+            value:
+              register: 
+                uri: register://local/sys/current_timestamp
+    changes:
+      - required: true
+        operation:
+          add:
+            value_of_type: type

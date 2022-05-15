@@ -1,0 +1,27 @@
+id: tasks
+namespace: 'com.my_task_app'
+types:
+  -	id: task
+    kind: set
+    value:
+      set:
+        # must be set, so don't need to specify kind here
+        - id: id
+          value: random_uuid
+        - id: status
+          value: :uncompleted
+        - id: created_at
+          value: current_timestamp
+        - id: updated_at
+          value: current_timestamp
+    changes:
+      - required: true
+        change:
+          type_id: task.title
+	-	id: task.title
+		kind: text
+		value: ""
+		changes:
+			- required: false
+				change:
+					sign: positive
